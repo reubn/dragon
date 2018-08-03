@@ -1,4 +1,5 @@
 #!/bin/bash
+cd '/home/pi/dragon_dev/app'
 
-cd app
+echo "🐲  Starting Dragon"
 sudo node index

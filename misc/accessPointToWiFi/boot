@@ -1,9 +1,10 @@
 #!/bin/bash
-
-echo '🐲  Starting Tmux'
+echo '🖥  Creating Tmux Session'
 
 tmux new -d -s dragon_dev
 tmux set-option -t dragon_dev set-remain-on-exit on
-tmux send-keys -t dragon_dev 'cd dragon_dev && ./start' Enter
 
-if tmux has-session -t dragon_dev; then echo '🐲  Tmux Running'; else echo '🐲  Tmux Failed'; fi
+if tmux has-session -t dragon_dev;
+  then echo '🖥  Session Active  ✅' && tmux send-keys -t dragon_dev '/home/pi/dragon_dev/start' Enter;
+  else echo '🖥  No Session Found  ❌';
+fi

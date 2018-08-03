@@ -1,19 +1,18 @@
 #!/bin/sh
-
-echo "Trying"
+echo "🗄  Checking out Repo"
 
 DEPLOYDIR=/home/pi/dragon_dev/app
-
 GIT_WORK_TREE="$DEPLOYDIR" git checkout -f
-
 cd "$DEPLOYDIR"
+
+echo "📦  Installing Packages"
 
 npm install --production
 
-echo "🐲  Packages Updated"
-echo "🐲  Restarting..."
+echo "📦  Packages Installed  ✅"
+echo "🌀  Restarting Dragon"
 
 tmux send-keys -t dragon_dev C-c
-tmux send-keys -t dragon_dev './start' Enter
+tmux send-keys -t dragon_dev '/home/pi/dragon_dev/start' Enter
 
-echo "🐲  Dragon Restrted"
+echo "🌀  Dragon Restarted  ✅"

@@ -18,8 +18,8 @@
 # Transfer Bash Scripts
   `start` -> `/home/pi/dragon_dev/start`
   `boot` -> `/home/pi/dragon_dev/boot`
-  `chmod u+x /home/pi/dragon_dev/start`
-  `chmod u+x /home/pi/dragon_dev/boot`
+  `chmod +x /home/pi/dragon_dev/start`
+  `chmod +x /home/pi/dragon_dev/boot`
 
 # Boot Service
   Transfer `dragon_dev.service` to `/lib/systemd/system/dragon_dev.service`
