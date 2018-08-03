@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo '🐲  Starting Tmux'
+
+tmux new -d -s dragon_dev
+tmux set-option -t dragon_dev set-remain-on-exit on
+tmux send-keys -t dragon_dev 'cd dragon_dev && ./start' Enter
+
+if tmux has-session -t dragon_dev; then echo '🐲  Tmux Running'; else echo '🐲  Tmux Failed'; fi

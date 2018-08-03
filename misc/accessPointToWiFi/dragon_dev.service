@@ -1,0 +1,16 @@
+[Unit]
+Description=🐲 Dev Tmux Boot Service
+After=network.target
+
+[Service]
+Type=oneshot
+User=pi
+WorkingDirectory=/home/pi
+ExecStart=/home/pi/dragon_dev/boot
+StandardOutput=journal
+Restart=no
+KillMode=none
+
+[Install]
+WantedBy=multi-user.target
+Alias=dragon_dev.service

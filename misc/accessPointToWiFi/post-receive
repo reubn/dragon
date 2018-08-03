@@ -1,0 +1,19 @@
+#!/bin/sh
+
+echo "Trying"
+
+DEPLOYDIR=/home/pi/dragon_dev/app
+
+GIT_WORK_TREE="$DEPLOYDIR" git checkout -f
+
+cd "$DEPLOYDIR"
+
+npm install --production
+
+echo "🐲  Packages Updated"
+echo "🐲  Restarting..."
+
+tmux send-keys -t dragon_dev C-c
+tmux send-keys -t dragon_dev './start' Enter
+
+echo "🐲  Dragon Restrted"
