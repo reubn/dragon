@@ -7,7 +7,7 @@ cd "$DEPLOYDIR"
 
 echo "📦  Installing Packages"
 
-npm install --production
+npm ci --production --no-audit
 
 echo "📦  Packages Installed  ✅"
 echo "🌀  Restarting Dragon"
