@@ -1,6 +1,6 @@
-#!/bin/sh
 echo "🗄  Checking out Repo"
 
+#!/bin/bash
 DEPLOYDIR=/home/pi/dragon_dev/app
 GIT_WORK_TREE="$DEPLOYDIR" git checkout -f
 cd "$DEPLOYDIR"
