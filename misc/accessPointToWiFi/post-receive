@@ -1,15 +1,29 @@
-echo "🗄  Checking out Repo"
-
 #!/bin/bash
 DEPLOYDIR=/home/pi/dragon_dev/app
+
 GIT_WORK_TREE="$DEPLOYDIR" git checkout -f
+echo "🗄  Checked out Repo"
+
+while read oldrev newrev refname; do
+    if [ "$refname" = "refs/heads/master" ]; then
+        if git diff-tree --name-only -r -z $oldrev $newrev | grep --quiet "package-lock.json";
+          then PACKAGES_CHANGED=true
+          else PACKAGES_CHANGED=false
+        fi
+    fi
+done
+
 cd "$DEPLOYDIR"
 
-echo "📦  Installing Packages"
+if [[ "$PACKAGES_CHANGED" = true ]]
+  then
+    echo "📦 ⚠️ package-lock.json Changed - Updating Packages"
+    npm ci --production --no-audit
+    echo "📦  Packages Updated  ✅"
+  else
+    echo "📦  package-lock.json Identical - skipping  ✅"
+fi
 
-npm ci --production --no-audit
-
-echo "📦  Packages Installed  ✅"
 echo "🌀  Restarting Dragon"
 
 tmux send-keys -t dragon_dev C-c
