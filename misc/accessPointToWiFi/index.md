@@ -23,6 +23,8 @@
 
 # Boot Service
   Transfer `dragon_dev.service` to `/lib/systemd/system/dragon_dev.service`
+  Add `# Allow dragon to be started without password
+       %sudo ALL = (ALL) NOPASSWD: /home/pi/dragon_dev/start` to sudoers using `sudo visudo`
 
 # Git Deployment
   `cd /home/pi/dragon/repo.git`
@@ -71,6 +73,5 @@
   `sudo service dnsmasq start`
 
   `sudo systemctl enable dragon_dev`
-  `sudo systemctl start dragon_dev`
 
   `sudo reboot`

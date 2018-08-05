@@ -5,6 +5,6 @@ tmux new -d -s dragon_dev
 tmux set-option -t dragon_dev set-remain-on-exit on
 
 if tmux has-session -t dragon_dev;
-  then echo '🖥  Session Active  ✅' && tmux send-keys -t dragon_dev '/home/pi/dragon_dev/start' Enter;
+  then echo '🖥  Session Active  ✅' && tmux send-keys -t dragon_dev 'sudo /home/pi/dragon_dev/start' Enter;
   else echo '🖥  No Session Found  ❌';
 fi
