@@ -9,12 +9,10 @@ export default class Wifi {
   async scanForSSIDs(){
     const networksOnAir = await this.wireless.scan()
 
-    const groupedBySSID = networksOnAir.reduce((SSIDs, {ssid: SSID, ...other}) => {
-      if(SSIDs[SSID]) SSIDs[SSID].push({...other})
-      else SSIDs[SSID] = [{...other}]
-
-      return SSIDs
-    }, {})
+    const groupedBySSID = networksOnAir.reduce((SSIDs, {ssid: SSID, ...other}) => ({
+      ...SSIDs,
+      [SSID]: [...(SSIDs[SSID] || []), {...other}]
+    }), {})
 
     return Object.entries(groupedBySSID)
       .reduce((reformatted, [SSID, networkArray]) => [
