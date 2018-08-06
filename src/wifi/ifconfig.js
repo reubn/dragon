@@ -214,7 +214,6 @@ function status(iface, callback) {
     this.exec('ifconfig ' + iface, parse_status_iface(callback));
   }
   else {
-    console.log('RR', iface)
     this.exec('ifconfig -a', parse_status(iface));
   }
 }
