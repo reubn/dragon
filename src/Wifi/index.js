@@ -1,25 +1,5 @@
-import {Wireless} from 'wirelesser'
+import {wifiIface} from '../config'
 
-export default class Wifi {
-  constructor(iface){
-    this.iface = iface
-    this.wireless = new Wireless(this.iface)
-  }
+import Wifi from './Wifi'
 
-  async scanForSSIDs(){
-    const networksOnAir = await this.wireless.scan()
-
-    const groupedBySSID = networksOnAir.reduce((SSIDs, {ssid: SSID, ...other}) => ({
-      ...SSIDs,
-      [SSID]: [...(SSIDs[SSID] || []), {...other}]
-    }), {})
-
-    return Object.entries(groupedBySSID)
-      .reduce((reformatted, [SSID, networkArray]) => [
-        ...reformatted, {
-          SSID,
-          networks: networkArray.sort(({signal: a}, {signal: b}) => b - a)
-        }], [])
-      .sort(({networks: [{signal: a}]}, {networks: [{signal: b}]}) => b - a)
-  }
-}
+export default new Wifi(wifiIface)
