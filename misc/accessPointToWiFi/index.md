@@ -34,7 +34,7 @@
 # Git Deployment
   `cd /home/pi/dragon_dev/repo.git`
   `git init --bare`
-  Transfer `post-receive` to `/home/pi/dragon_dev/repo.git/hooks`
+  `post-receive` -> `/home/pi/dragon_dev/repo.git/hooks/post-receive`
   `sudo chmod +x /home/pi/dragon_dev/repo.git/hooks/post-receive`
 
 # hostapd
@@ -56,13 +56,13 @@
   Replace `#net.ipv4.ip_forward=1` with `net.ipv4.ip_forward=1` in `/etc/sysctl.conf`
   `sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"`
 
-  `sudo iptables -P INPUT ACCEPT`
-  `sudo iptables -P FORWARD ACCEPT`
-  `sudo iptables -P OUTPUT ACCEPT`
-  `sudo iptables -t nat -F`
-  `sudo iptables -t mangle -F`
-  `sudo iptables -F`
-  `sudo iptables -X`
+  `sudo iptables -P INPUT ACCEPT
+   sudo iptables -P FORWARD ACCEPT
+   sudo iptables -P OUTPUT ACCEPT
+   sudo iptables -t nat -F
+   sudo iptables -t mangle -F
+   sudo iptables -F
+   sudo iptables -X`
 
   `sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE`
   `sudo iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT`
