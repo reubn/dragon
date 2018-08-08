@@ -23,8 +23,8 @@
 # Transfer Bash Scripts
   `start` -> `/home/pi/dragon_dev/start`
   `boot` -> `/home/pi/dragon_dev/boot`
-  `chmod +x /home/pi/dragon_dev/start`
-  `chmod +x /home/pi/dragon_dev/boot`
+  `sudo chmod +x /home/pi/dragon_dev/start`
+  `sudo chmod +x /home/pi/dragon_dev/boot`
 
 # Boot Service
   Transfer `dragon_dev.service` to `/lib/systemd/system/dragon_dev.service`
@@ -35,7 +35,7 @@
   `cd /home/pi/dragon/repo.git`
   `git init --bare`
   Transfer `post-receive` to `/home/pi/dragon_dev/repo.git/hooks`
-  `chmod u+x /home/pi/dragon_dev/repo.git/hooks/post-receive`
+  `sudo chmod +x /home/pi/dragon_dev/repo.git/hooks/post-receive`
 
 # hostapd
   Transfer `hostapd.conf` -> `/etc/hostapd/hostapd.conf`
