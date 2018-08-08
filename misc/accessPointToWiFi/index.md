@@ -9,7 +9,7 @@
   - Run `ssh-copy-id pi@dragon.local` on dev machine
 
 # Package Setup
-  `curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -`
+  `curl -sL https://raw.githubusercontent.com/sdesalas/node-pi-zero/master/install-node-v.last.sh | sudo -E bash -`
   `sudo apt update`
   `sudo apt upgrade`
   `sudo reboot`
