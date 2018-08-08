@@ -32,7 +32,7 @@
        %sudo ALL = (ALL) NOPASSWD: /home/pi/dragon_dev/start` to sudoers using `sudo visudo`
 
 # Git Deployment
-  `cd /home/pi/dragon/repo.git`
+  `cd /home/pi/dragon_dev/repo.git`
   `git init --bare`
   Transfer `post-receive` to `/home/pi/dragon_dev/repo.git/hooks`
   `sudo chmod +x /home/pi/dragon_dev/repo.git/hooks/post-receive`
@@ -40,13 +40,13 @@
 # hostapd
   Transfer `hostapd.conf` -> `/etc/hostapd/hostapd.conf`
   Replace `#DAEMON_CONF=""` with `DAEMON_CONF="/etc/hostapd/hostapd.conf"` in `/etc/default/hostapd`
-  Replace `DAEMON_CONF=""` with `DAEMON_CONF="/etc/hostapd/hostapd.conf"` in `/etc/init.d/hostapd`
+  Replace `DAEMON_CONF=""` with `DAEMON_CONF=/etc/hostapd/hostapd.conf` in `/etc/init.d/hostapd`
 
 # dhcpcd
-  Transfer `dhcpcd.conf` -> `/etc/dhcpcd.conf`
+  Add contents of `dhcpcd.conf` to end of `/etc/dhcpcd.conf`
 
 # dnsmasq
-  Transfer `dnsmasq.conf` -> `/etc/dnsmasq.conf`
+  Add contents of `dnsmasq.conf` to end of `/etc/dnsmasq.conf`
 
 # wpa_supplicant
   Transfer `wpa_supplicant-wlan1.conf` -> `/etc/wpa_supplicant/wpa_supplicant-wlan1.conf`
