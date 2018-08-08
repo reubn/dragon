@@ -1,7 +1,12 @@
 # Preparation
-  - Plug in Ethernet Cable
+  - Flash Raspian Lite Stretch
+  - Add ssh file to SD card
+  - EITHER Add `wpa_supplicant-wlan1.conf` to SD card as `wpa_supplicant.conf`
+    OR Plug in Ethernet Cable
   - Change pi password
   - Change hostname to `dragon`
+  - Run `sudo reboot`
+  - Run `ssh-copy-id pi@dragon.local` on dev machine
 
 # Package Setup
   `curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -`
