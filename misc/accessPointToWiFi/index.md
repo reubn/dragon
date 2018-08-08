@@ -74,8 +74,14 @@
   `sudo systemctl start wpa_supplicant@wlan1.service`
   `sudo systemctl enable wpa_supplicant@wlan1.service`
 
-  `sudo service hostapd start`
+  `sudo systemctl disable wpa_supplicant`
+  `sudo wpa_cli -i wlan0 terminate`
+  `sudo rm /etc/wpa_supplicant/wpa_supplicant.conf`
+
+  `sudo ifconfig wlan0 down`
+
   `sudo service dnsmasq start`
+  `sudo service hostapd start`
 
   `sudo systemctl enable dragon_dev`
 
