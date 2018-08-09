@@ -41,7 +41,7 @@
     "eventemitter3": "^3.1.0",
     "koa": "^2.5.2",
     "koa-router": "^7.4.0",
-    "koa-sse-stream": "^0.1.1",
+    "koa-sse-stream": "git+https://git@github.com/reubn/koa-sse-stream.git",
     "koa-static": "^5.0.0",
     "symbol-description": "^1.0.0",
     "wirelesser": "^2.2.0"
