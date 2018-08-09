@@ -2,7 +2,9 @@ import symbolDesc from 'symbol-description'
 import wifi from '../../wifi'
 
 export default async ctx => {
-  wifi.on(wifi.events.all, (event, data) => ctx.sse.send(JSON.stringify({event: symbolDesc(event), data})))
+  const listener = (event, data) => ctx.sse.send(JSON.stringify({event: symbolDesc(event), data}))
 
-  ctx.req.socket.on('close', () => ctx.sse.end())
+  wifi.on(wifi.events.all, listener)
+
+  ctx.req.socket.on('close', () => wifi.removeListener(wifi.events.all, listener))
 }
