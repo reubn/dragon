@@ -107,6 +107,20 @@ export default class Wifi extends BetterEvents {
     return result
   }
 
+  async knownSSIDs(){
+    const list = await this.wireless.listNetworks()
+    const networks = list.map(({ssid: SSID, flags, ...other}) => ({
+      SSID,
+      /* flags: flags
+        .split(']')
+        .map(p => p.replace('[', ''))
+        .filter(a => a), */
+      ...other
+    }))
+
+    return networks
+  }
+
   static async listInterfaces(){
     return new Promise((res, rej) => ifconfig.status((err, result) => err ? rej(err) : res(result)))
   }
