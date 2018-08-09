@@ -1,5 +1,5 @@
 import wifi from '../../wifi'
 
 export default async ctx => {
-  ctx.body = await wifi.scanForSSIDs()
+  ctx.body = await wifi.SSIDscan()
 }

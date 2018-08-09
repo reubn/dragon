@@ -37,7 +37,7 @@ export default class Wifi extends BetterEvents {
     this.statusThrottled()
   }
 
-  async scanForSSIDs(){
+  async SSIDscan(){
     if(this.scanCache.staleAt && this.scanCache.staleAt > Date.now()) return this.scanCache.scan
 
     const accessPointWifiAddress = await this.accessPointWifiAddress
