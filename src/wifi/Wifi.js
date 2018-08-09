@@ -8,11 +8,12 @@ export default class Wifi {
   constructor(iface){
     this.iface = iface
     this.wireless = new Wireless(this.iface)
-
-    this.accessPointWifiAddress = Wifi.listInterfaces().then(ifaces => (ifaces.find(({iface: ifaceA}) => ifaceA === accessPointIface)||{}).address)
-
-    this.scanCache = {}
   }
+
+  // Search Interfaces for that of our Access Point, so that it can be removed from SSIDs shown
+  accessPointWifiAddress = Wifi.listInterfaces().then(ifaces => (ifaces.find(({iface: ifaceA}) => ifaceA === accessPointIface)||{}).address)
+
+  scanCache = {}
 
   async scanForSSIDs(){
     const cacheTime = 10 * 1000
