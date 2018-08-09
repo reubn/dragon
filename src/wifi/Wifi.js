@@ -1,3 +1,4 @@
+import {exec} from 'child-process-promise'
 import {Wireless} from 'wirelesser'
 
 import {accessPointIface} from '../config'
@@ -71,6 +72,20 @@ export default class Wifi extends BetterEvents {
     this.emit(this.events.status, final)
 
     return final
+  }
+
+  async connect({SSID, password}={}){
+    if(!SSID || !password) return 'FAIL'
+
+    await this.wireless.connect(SSID, password)
+
+    return this.status()
+  }
+
+  async disconnect(){
+    await this.wireless.disconnect()
+
+    return this.status()
   }
 
   async changeMAC(MAC){
