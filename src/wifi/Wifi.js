@@ -42,6 +42,22 @@ export default class Wifi {
     return scan
   }
 
+  async status(){
+    const status = await this.wireless.status()
+
+    const state = do {
+      if(status.wpa_state === 'INACTIVE') 'inactive'
+      else if(status.wpa_state === 'COMPLETED') 'connected'
+      else if(status.wpa_state === 'DISCONNECTED' && status.ip_address) 'ap'
+      else if(status.wpa_state === 'DISCONNECTED') 'disconnected'
+      else null
+    }
+
+    const final = {...status, state}
+
+    return final
+  }
+
   static async listInterfaces(){
     return new Promise((res, rej) => ifconfig.status((err, result) => err ? rej(err) : res(result)))
   }
