@@ -100,7 +100,7 @@ export default class Wifi extends BetterEvents {
 
   async changeMAC(MAC){
     await this.wireless.down()
-    const result = await exec(['macchanger', MAC ? `-m ${MAC}` : '-r', this.iface].join(' '))
+    const result = await exec(['macchanger', MAC ? `-m ${MAC}` : '-A', this.iface].join(' '))
     await this.wireless.up()
 
     console.log(result)
