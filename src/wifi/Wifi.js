@@ -2,11 +2,15 @@ import {Wireless} from 'wirelesser'
 
 import {accessPointIface} from '../config'
 
+import BetterEvents from './BetterEvents'
 import ifconfig from './ifconfig'
 
-export default class Wifi {
+export default class Wifi extends BetterEvents {
   constructor(iface){
+    super()
+
     this.iface = iface
+
     this.wireless = new Wireless(this.iface)
   }
 
@@ -14,6 +18,12 @@ export default class Wifi {
   accessPointWifiAddress = Wifi.listInterfaces().then(ifaces => (ifaces.find(({iface: ifaceA}) => ifaceA === accessPointIface)||{}).address)
 
   scanCache = {}
+
+  events = {
+    ...super.events,
+    scan: Symbol('scan'),
+    status: Symbol('status')
+  }
 
   async scanForSSIDs(){
     const cacheTime = 10 * 1000
@@ -40,6 +50,8 @@ export default class Wifi {
       staleAt: Date.now() + cacheTime
     }
 
+    this.emit(this.events.scan, scan)
+
     return scan
   }
 
@@ -55,6 +67,8 @@ export default class Wifi {
     }
 
     const final = {...status, state}
+
+    this.emit(this.events.status, final)
 
     return final
   }
