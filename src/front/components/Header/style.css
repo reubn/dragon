@@ -1,0 +1,25 @@
+.header {
+  --height: 4rem;
+
+  width: 100%;
+  height: var(--height);
+
+  line-height: var(--height);
+  font-size: 1.2rem;
+  letter-spacing: -0.58px;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.1);
+
+  border-bottom: 1px solid rgba(85, 97, 255, 0.1);
+
+  transition: color 0.15s ease-in;
+}
+
+.unknown {
+  color: var(--colours-pink-red);
+}
+
+.connected {
+  color: var(--colours-green);
+}

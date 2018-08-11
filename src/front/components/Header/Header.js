@@ -1,8 +1,15 @@
 import React from 'react'
+import classnames from 'classnames'
+
+import {header, connected, unknown} from './style'
+
+const stateClasses = {
+  connected, unknown
+}
 
 const Header = ({state}) => (
-  <header>
-    <span>{state}</span>
+  <header className={classnames(header, stateClasses[state] || unknown)}>
+    {state}
   </header>
 )
 
