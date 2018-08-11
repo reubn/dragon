@@ -1,0 +1,41 @@
+.details {
+  width: 100%;
+  height: 50vh;
+  text-align: left;
+
+  border-bottom: 1px solid rgba(85, 97, 255, 0.1);
+}
+
+.ssid {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--colours-white);
+  margin-top: 1rem;
+  margin-left: 1.5rem;
+  margin-bottom: 0;
+}
+
+.mac {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--colours-orange);
+  margin-top: -0.8rem;
+  margin-left: 1.5rem;
+  margin-bottom: 0;
+}
+
+.ip {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--colours-pink);
+  margin-top: -0.4rem;
+  margin-left: 1.5rem;
+}
+
+.unknown {
+  color: var(--colours-pink-red);
+}
+
+.connected {
+  color: var(--colours-green);
+}
