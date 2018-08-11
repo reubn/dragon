@@ -27,7 +27,8 @@ export default class Wifi extends BetterEvents {
   events = {
     ...super.events,
     scan: Symbol('scan'),
-    status: Symbol('status')
+    status: Symbol('status'),
+    knownSSIDs: Symbol('knownSSIDs')
   }
 
   statusThrottled = throttle(() => this.status(), statusUpdateFrequency)
@@ -117,6 +118,8 @@ export default class Wifi extends BetterEvents {
         .filter(a => a), */
       ...other
     }))
+
+    this.emit(this.events.knownSSIDs, networks)
 
     return networks
   }
