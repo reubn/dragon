@@ -6,5 +6,7 @@ export default async ctx => {
 
   wifi.on(wifi.events.all, listener)
 
+  wifi.status()
+
   ctx.req.socket.on('close', () => wifi.removeListener(wifi.events.all, listener))
 }
