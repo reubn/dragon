@@ -1,5 +1,5 @@
-import about from './about'
+import status from './status'
 
 export default {
-  about
+  status
 }

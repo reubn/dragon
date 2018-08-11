@@ -2,11 +2,11 @@ import {combineReducers} from 'redux'
 
 import {routerReducer} from 'react-router-redux'
 
-import about from './about'
+import status from './status'
 
 const reducers = {
   routing: routerReducer,
-  about
+  status
 }
 
 export default combineReducers(reducers)
