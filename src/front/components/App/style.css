@@ -11,7 +11,7 @@
   overflow: hidden;
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
-  background: var(--colours-blue-dark);
+  background: linear-gradient(0deg, var(--colours-blue-dark-1) 0%, var(--colours-blue-dark) 100%);
 }
 
 .logo {
