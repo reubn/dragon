@@ -1,5 +1,6 @@
 import wifi from '../../wifi'
 
 export default async ctx => {
-  ctx.body = await wifi.changeMAC(ctx.request.body.MAC)
+  ctx.body = {}
+  wifi.changeMAC(ctx.request.body.MAC)
 }
