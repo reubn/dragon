@@ -1,0 +1,61 @@
+@import './fonts';
+
+:root {
+  --colours-red: #ff5252;
+  --colours-red-hint: #ff5260;
+
+  --colours-yellow: #ffed61;
+  --colours-yellow-hint: #fff157;
+
+  --colours-orange: #ffc233;
+  --colours-orange-hint: #ffc629;
+
+  --colours-green: #3dfa7c;
+  --colours-green-hint: #3dfa89;
+
+  --colours-aqua: #5aedc8;
+  --colours-aqua-hint: #46ebba;
+
+  --colours-blue: #5ad3ff;
+  --colours-blue-hint: #15d3ff;
+
+  --colours-blue-dark: #1E2C36;
+  --colours-blue-dark-1: #202f37;
+  --colours-blue-dark-2: #2A3A45;
+  --colours-blue-dark-2-hint: #253641;
+
+  --colours-pink: #ff388e;
+  --colours-pink-hint: #ff337e;
+
+  --colours-pink-red: #ff4271;
+  --colours-pink-red-hint: #ff387a;
+
+  --colours-purple: #c34ef9;
+  --colours-purple-hint: #952ff5;
+
+  --colours-purple-dark: #5555dd;
+  --colours-purple-dark-hint: #5d51dd;
+
+  --colours-black: #1e1f1f;
+  --colours-black-1: #333;
+  --colours-black-2: #444;
+  --colours-black-3: #525252;
+  --colours-black-4: #5d5d5d;
+  --colours-black-5: #676767;
+
+  --colours-grey: #dadada;
+  --colours-grey-1: #bbb;
+  --colours-grey-2: #999;
+  --colours-grey-3: #939393;
+  --colours-grey-4: #8c8c8c;
+  --colours-grey-5: #7b7b7b;
+
+  --colours-white: #fff;
+  --colours-white-1: #fbfbfb;
+  --colours-white-2: #f9f9f9;
+  --colours-white-3: #f2f2f2;
+  --colours-white-4: #ececec;
+  --colours-white-5: #e2e2e2;
+
+  --font-family: 'Proxima Nova Soft', 'Museo Sans Rounded', 'PT Sans', 'Arial Rounded', sans-serif;
+}

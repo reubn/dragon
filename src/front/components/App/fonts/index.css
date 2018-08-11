@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Proxima Nova Soft';
+  src: url('./00d731daf2951815b0b07023d1e16e565020a62c782dc6d82844afb57330fbd.woff2') format('woff2'), url('./00d731daf2951815b0b07023d1e16e565020a62c782dc6d82844afb57330fbd.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Proxima Nova Soft';
+  src: url('./dfda0176ba5c965ecf1788f61113e6d1719dab2fa780feac03ec89f5940c0cb.woff2') format('woff2'), url('./dfda0176ba5c965ecf1788f61113e6d1719dab2fa780feac03ec89f5940c0cb.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Proxima Nova Soft';
+  src: url('./70f12939b511157a12691c79c93fdf3866128216957c079aea8e839a59873c7.woff2') format('woff2'), url('./70f12939b511157a12691c79c93fdf3866128216957c079aea8e839a59873c7.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
