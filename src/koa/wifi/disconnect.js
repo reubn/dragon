@@ -1,6 +1,5 @@
 import wifi from '../../wifi'
 
 export default async ctx => {
-  ctx.body = {}
-  wifi.disconnect()
+  ctx.body = await wifi.disconnect()
 }
