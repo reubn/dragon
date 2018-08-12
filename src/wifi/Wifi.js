@@ -1,5 +1,6 @@
 import {exec} from 'child-process-promise'
 import {Wireless, Monitor} from 'wirelesser'
+import {status as iwconfig} from 'wireless-tools/iwconfig'
 import throttle from 'lodash.throttle'
 
 import {accessPointIface, scanCacheTime, statusUpdateFrequency} from '../config'
@@ -68,17 +69,25 @@ export default class Wifi extends BetterEvents {
   }
 
   async status(){
-    const status = await this.wireless.status()
+    const iwconfigPromise = new Promise((res, rej) => iwconfig((err, data) => err ? rej(err) : res(data)))
+    const [wirelessStatus, {noise, quality, sensitivity, signal}={}] = await Promise.all([this.wireless.status(), iwconfigPromise])
 
     const state = do {
-      if(status.wpa_state === 'INACTIVE') 'inactive'
-      else if(status.wpa_state === 'COMPLETED') 'connected'
-      else if(status.wpa_state === 'DISCONNECTED' && status.ip_address) 'ap'
-      else if(status.wpa_state === 'DISCONNECTED') 'disconnected'
+      if(wirelessStatus.wpa_state === 'INACTIVE') 'inactive'
+      else if(wirelessStatus.wpa_state === 'COMPLETED') 'connected'
+      else if(wirelessStatus.wpa_state === 'DISCONNECTED' && wirelessStatus.ip_address) 'ap'
+      else if(wirelessStatus.wpa_state === 'DISCONNECTED') 'disconnected'
       else null
     }
 
-    const final = {...status, state}
+    const final = {
+      ...wirelessStatus,
+      state,
+      noise,
+      quality,
+      sensitivity,
+      signal
+    }
 
     this.emit(this.events.status, final)
 
