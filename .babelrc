@@ -1,6 +1,7 @@
 {
   "presets": [
     ["env", {
+      "useBuiltIns": true,
       "targets": {
         "node": "10.8.0"
       }

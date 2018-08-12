@@ -12,7 +12,7 @@ const devMode = process.env.NODE_ENV !== 'production'
 export default [{
   name: 'server',
   mode: devMode ? 'development' : 'production',
-  entry: './src',
+  entry: ['babel-polyfill', './src'],
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'index.js'
@@ -36,7 +36,7 @@ export default [{
   name: 'front',
   mode: devMode ? 'development' : 'production',
   entry: {
-    index: './src/front'
+    index: ['babel-polyfill', './src/front']
   },
   output: {
     path: path.resolve(__dirname, './dist/front'),
@@ -51,6 +51,7 @@ export default [{
         options: {
           presets: [
             ['env', {
+              useBuiltIns: true,
               targets: {
                 browsers: ['last 1 version', 'not dead', '> 0.2%']
               }

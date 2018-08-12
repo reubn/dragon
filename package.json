@@ -48,6 +48,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "child-process-promise": "^2.2.1",
     "eventemitter3": "^3.1.0",
     "koa": "^2.5.2",
