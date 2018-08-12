@@ -66,6 +66,8 @@ export default class Wifi extends BetterEvents {
       staleAt: Date.now() + scanCacheTime
     }
 
+    this.emit(this.events.scan, scan)
+
     return scan
   }
 
