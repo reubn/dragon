@@ -95,8 +95,16 @@ export default class Wifi extends BetterEvents {
     return final
   }
 
-  async connect({SSID, password}={}){
-    if(!SSID || !password) return 'FAIL'
+  async connect({SSID, password, id}={}){
+    if(id) {
+      await this.wireless.enableNetwork(id)
+      await this.wireless.selectNetwork(id)
+      return await this.wireless.saveConfiguration()
+    }
+
+    if(!SSID) return {error: true}
+
+    if(!password) console.log('No Password Supplied for', SSID)
 
     return this.wireless.connect(SSID, password)
   }
