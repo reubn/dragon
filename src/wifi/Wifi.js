@@ -35,6 +35,9 @@ export default class Wifi extends BetterEvents {
   _monitorThrottled = throttle((...args) => this._handleMonitor(...args), monitorUpdateFrequency)
   async _handleMonitor(args){
     const status = await this.status()
+    console.log(args, status.state, status.wpa_state)
+
+    if(args.startsWith('<3>CTRL-EVENT-CONNECTED')) setTimeout(async () => this.emit(this.events.status, await this.status()), connectStatusUpdateDelay)
     this.emit(this.events.status, status)
   }
 
