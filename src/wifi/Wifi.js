@@ -3,7 +3,7 @@ import {Wireless, Monitor} from 'wirelesser'
 import iwconfig from 'wireless-tools/iwconfig'
 import throttle from 'lodash.throttle'
 
-import {accessPointIface, scanCacheTime, statusUpdateFrequency} from '../config'
+import {accessPointIface, scanCacheTime, monitorUpdateFrequency} from '../config'
 
 import BetterEvents from './BetterEvents'
 import ifconfig from './ifconfig'
@@ -17,7 +17,7 @@ export default class Wifi extends BetterEvents {
     this.wireless = new Wireless(this.iface)
     this.monitor = new Monitor(this.iface)
 
-    this.monitor.on('data', (...args) => this._handleMonitor(...args))
+    this.monitor.on('data', (...args) => this._monitorThrottled(...args))
   }
 
   // Search Interfaces for that of our Access Point, so that it can be removed from SSIDs shown
@@ -32,11 +32,12 @@ export default class Wifi extends BetterEvents {
     knownSSIDs: Symbol('knownSSIDs')
   }
 
-  statusThrottled = throttle(() => this.status(), statusUpdateFrequency)
+  _monitorThrottled = throttle((...args) => this._handleMonitor(...args), monitorUpdateFrequency)
+  async _handleMonitor(args){
+    console.log('Monitor', JSON.stringify(args, null, 2))
 
-  _handleMonitor(/* ...args */){
-    // this.emit(this.events.control, args)
-    this.statusThrottled()
+    const status = await this.status()
+    this.emit(this.events.status, status)
   }
 
   async SSIDscan(){
@@ -63,8 +64,6 @@ export default class Wifi extends BetterEvents {
       staleAt: Date.now() + scanCacheTime
     }
 
-    this.emit(this.events.scan, scan)
-
     return scan
   }
 
@@ -89,23 +88,17 @@ export default class Wifi extends BetterEvents {
       signal
     }
 
-    this.emit(this.events.status, final)
-
     return final
   }
 
   async connect({SSID, password}={}){
     if(!SSID || !password) return 'FAIL'
 
-    await this.wireless.connect(SSID, password)
-
-    return this.status()
+    return this.wireless.connect(SSID, password)
   }
 
   async disconnect(){
-    await this.wireless.disconnect()
-
-    return this.status()
+    return this.wireless.disconnect()
   }
 
   async changeMAC(MAC){
@@ -127,8 +120,6 @@ export default class Wifi extends BetterEvents {
         .filter(a => a), */
       ...other
     }))
-
-    this.emit(this.events.knownSSIDs, networks)
 
     return networks
   }
