@@ -1,9 +1,8 @@
 import {exec} from 'child-process-promise'
 import {Wireless, Monitor} from 'wirelesser'
 import iwconfig from 'wireless-tools/iwconfig'
-import throttle from 'lodash.throttle'
 
-import {accessPointIface, scanCacheTime, monitorUpdateFrequency} from '../config'
+import {accessPointIface, scanCacheTime, monitorUpdateFrequency, connectStatusUpdateDelay} from '../config'
 
 import BetterEvents from './BetterEvents'
 import ifconfig from './ifconfig'
@@ -17,7 +16,7 @@ export default class Wifi extends BetterEvents {
     this.wireless = new Wireless(this.iface)
     this.monitor = new Monitor(this.iface)
 
-    this.monitor.on('data', (...args) => this._monitorThrottled(...args))
+    this.monitor.on('data', (...args) => this._handleMonitor(...args))
   }
 
   // Search Interfaces for that of our Access Point, so that it can be removed from SSIDs shown
@@ -32,7 +31,6 @@ export default class Wifi extends BetterEvents {
     knownSSIDs: Symbol('knownSSIDs')
   }
 
-  _monitorThrottled = throttle((...args) => this._handleMonitor(...args), monitorUpdateFrequency)
   async _handleMonitor(args){
     const status = await this.status()
     console.log(args, status.state, status.wpa_state)
