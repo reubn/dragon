@@ -1,10 +1,10 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import {header, connected, unknown} from './style'
+import {header, connected, unknown, switching} from './style'
 
 const stateClasses = {
-  connected, unknown
+  connected, unknown, switching
 }
 
 const Header = ({state}) => (

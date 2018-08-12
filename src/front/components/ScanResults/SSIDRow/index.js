@@ -17,7 +17,7 @@ const mergeProps = (stateProps, {connectUnbound, requestPasswordUnbound}, {SSID,
   // const connect = () => known ? connectUnbound({id: known.id}) :
 
   const connect = () => do {
-    if(known) connectUnbound({id: known.id}) // Known SSID
+    if(known) connectUnbound({SSID, id: known.id}) // Known SSID
     else if(!secure) connectUnbound({SSID}) // Unknown but Open
     else requestPasswordUnbound({SSID, callToConnect: password => connectUnbound({SSID, password})}) // Unknown and Secure
   }

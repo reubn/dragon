@@ -5,8 +5,8 @@ import SignalStrength from '../../SignalStrength'
 
 import {row, title, signalStrength, secure as secureStyle, iconGroup} from './style'
 
-const SSIDRow = ({SSID, secure, signal}) => (
-  <section className={row}>
+const SSIDRow = ({SSID, secure, signal, connect}) => (
+  <section className={row} onClick={connect}>
     <span className={title}>{SSID}</span>
     <span className={iconGroup}>
       <SignalStrength className={signalStrength} signal={signal} />

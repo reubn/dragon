@@ -23,3 +23,7 @@
 .connected {
   color: var(--colours-green);
 }
+
+.switching {
+  color: var(--colours-orange);
+}

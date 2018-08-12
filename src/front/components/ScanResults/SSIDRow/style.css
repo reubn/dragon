@@ -3,6 +3,7 @@
   height: var(--height);
   border-bottom: 1px solid var(--colours-blue-dark);
   line-height: var(--height);
+  cursor: pointer;
 }
 .iconGroup {
   position: absolute;
