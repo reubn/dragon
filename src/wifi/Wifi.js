@@ -34,8 +34,6 @@ export default class Wifi extends BetterEvents {
 
   _monitorThrottled = throttle((...args) => this._handleMonitor(...args), monitorUpdateFrequency)
   async _handleMonitor(args){
-    console.log('Monitor', JSON.stringify(args, null, 2))
-
     const status = await this.status()
     this.emit(this.events.status, status)
   }
@@ -77,6 +75,7 @@ export default class Wifi extends BetterEvents {
 
     const state = do {
       if(wirelessStatus.wpa_state === 'INACTIVE') 'inactive'
+      if(wirelessStatus.wpa_state === 'SCANNING') 'scanning'
       else if(wirelessStatus.wpa_state === 'COMPLETED') 'connected'
       else if(wirelessStatus.wpa_state === 'DISCONNECTED' && wirelessStatus.ip_address) 'ap'
       else if(wirelessStatus.wpa_state === 'DISCONNECTED') 'disconnected'

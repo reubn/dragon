@@ -54,7 +54,6 @@
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "koa-sse-stream": "git+https://git@github.com/reubn/koa-sse-stream.git",
     "koa-static": "^5.0.0",
     "lodash.throttle": "^4.1.1",
     "symbol-description": "^1.0.0",
