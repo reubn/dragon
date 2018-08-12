@@ -1,0 +1,24 @@
+.row {
+  --height: 4rem;
+  height: var(--height);
+  border-bottom: 1px solid var(--colours-blue-dark);
+  line-height: var(--height);
+}
+.iconGroup {
+  position: absolute;
+  right: 1rem;
+}
+.signalStrength {
+  width: 1.5rem;
+  vertical-align: sub;
+  height: var(--height);
+}
+.secure {
+  width: 1.5rem;
+  vertical-align: sub;
+  height: var(--height);
+}
+.title {
+  margin-left: 1.5rem;
+  color: var(--colours-white);
+}
