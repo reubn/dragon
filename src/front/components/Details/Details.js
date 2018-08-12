@@ -4,7 +4,7 @@ import SignalStrength from '../SignalStrength'
 
 import {details, ssid as ssidStyle, mac, ip, signalStrength} from './style'
 
-const Header = ({ssid, address, ip_address, signal}) => (
+const Details = ({ssid, address, ip_address, signal}) => (
   <section className={details}>
     <p className={ssidStyle}>{ssid}</p>
     <p className={mac}>{address}</p>
@@ -13,4 +13,4 @@ const Header = ({ssid, address, ip_address, signal}) => (
   </section>
 )
 
-export default Header
+export default Details
