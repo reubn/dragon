@@ -43,6 +43,7 @@ export default class Wifi extends BetterEvents {
   async SSIDscan(){
     if(this.scanCache.staleAt && this.scanCache.staleAt > Date.now()) return this.scanCache.scan
 
+    const knownSSIDs = await this.wireless.listNetworks()
     const accessPointWifiAddress = await this.accessPointWifiAddress
     const networksOnAir = await this.wireless.scan()
 
@@ -55,6 +56,7 @@ export default class Wifi extends BetterEvents {
       .reduce((reformatted, [SSID, networkArray]) => [
         ...reformatted, {
           SSID,
+          known: knownSSIDs.find(({ssid: knownSSID}) => SSID === knownSSID) || false,
           networks: networkArray.sort(({signal: a}, {signal: b}) => b - a)
         }], [])
       .sort(({networks: [{signal: a}]}, {networks: [{signal: b}]}) => b - a)
