@@ -6,5 +6,6 @@ export default ({dispatch}) => {
     console.log({eventType, data})
 
     if(eventType === 'status') return dispatch({type: 'STATUS_UPDATE', payload: data})
+    if(eventType === 'scan') return dispatch({type: 'SCAN_RESULTS', payload: data})
   }
 }
