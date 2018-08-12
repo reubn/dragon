@@ -1,0 +1,7 @@
+.enabled {
+  fill: var(--colours-white);
+}
+
+.disabled {
+  fill: var(--colours-blue-dark-2);
+}

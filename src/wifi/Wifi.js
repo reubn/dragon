@@ -1,6 +1,6 @@
 import {exec} from 'child-process-promise'
 import {Wireless, Monitor} from 'wirelesser'
-import {status as iwconfig} from 'wireless-tools/iwconfig'
+import iwconfig from 'wireless-tools/iwconfig'
 import throttle from 'lodash.throttle'
 
 import {accessPointIface, scanCacheTime, statusUpdateFrequency} from '../config'
@@ -69,7 +69,7 @@ export default class Wifi extends BetterEvents {
   }
 
   async status(){
-    const iwconfigPromise = new Promise((res, rej) => iwconfig((err, data) => err ? rej(err) : res(data)))
+    const iwconfigPromise = new Promise((res, rej) => iwconfig.status(this.iface, (err, data) => err ? rej(err) : res(data)))
     const [wirelessStatus, {noise, quality, sensitivity, signal}={}] = await Promise.all([this.wireless.status(), iwconfigPromise])
 
     const state = do {

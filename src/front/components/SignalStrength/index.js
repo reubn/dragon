@@ -1,6 +1,17 @@
 import React from 'react'
 
-export default ({signalStrength, ...props}) => {
+import {enabled, disabled} from './style'
+
+export default ({signal, ...props}) => {
+
+  let pattern = [0, 0, 0, 0]
+  if(signal >= -80) pattern = [1, 0, 0, 0]
+  if(signal >= -70) pattern = [1, 1, 0, 0]
+  if(signal >= -60) pattern = [1, 1, 1, 0]
+  if(signal >= -50) pattern = [1, 1, 1, 1]
+
+  const [first, second, third, fourth] = pattern.map(s => s ? enabled : disabled)
+
   return (
     <svg viewBox="0 0 42 32" {...props}>
       <path

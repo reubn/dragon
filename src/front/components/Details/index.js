@@ -4,6 +4,6 @@ import {connect} from 'react-redux'
 
 import Details from './Details'
 
-const mapStateToProps = ({status: {ssid, address, ip_address}}) => ({ssid, address, ip_address})
+const mapStateToProps = ({status: {ssid, address, ip_address, signal}}) => ({ssid, address, ip_address, signal})
 
 export default connect(mapStateToProps)(Details)
