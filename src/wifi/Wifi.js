@@ -96,7 +96,7 @@ export default class Wifi extends BetterEvents {
   }
 
   async connect({SSID, password, id}={}){
-    if(id) {
+    if(typeof id === 'number') {
       await this.wireless.enableNetwork(id)
       await this.wireless.selectNetwork(id)
       return await this.wireless.saveConfiguration()
