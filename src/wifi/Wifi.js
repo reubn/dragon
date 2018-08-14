@@ -2,7 +2,9 @@ import {exec} from 'child-process-promise'
 import {Wireless, Monitor} from 'wirelesser'
 import iwconfig from 'wireless-tools/iwconfig'
 
-import {accessPointIface, scanCacheTime, monitorUpdateFrequency, connectStatusUpdateDelay} from '../config'
+import {accessPointIface, scanCacheTime, monitorUpdateFrequency, statusPingInterval, scanPingInterval} from '../config'
+
+import every from '../util/every'
 
 import BetterEvents from './BetterEvents'
 import ifconfig from './ifconfig'
@@ -14,9 +16,34 @@ export default class Wifi extends BetterEvents {
     this.iface = iface
 
     this.wireless = new Wireless(this.iface)
-    this.monitor = new Monitor(this.iface)
+    // this.monitor = new Monitor(this.iface)
+    //
+    // this.monitor.on('data', (...args) => console.log(...args))
 
-    this.monitor.on('data', (...args) => this._handleMonitor(...args))
+    this.allEventListenerCount = 0
+
+    const statusPinger = every(() => this.statusPing(), statusPingInterval)
+    const scanPinger = every(() => this.scanPing(), scanPingInterval)
+
+    this.pingers = {
+      status: statusPinger,
+      scan: scanPinger
+    }
+
+    this.on('newListener', event => {
+      if(event === this.events.all && ++this.allEventListenerCount  ){
+        for(let pinger of Object.values(this.pingers)) {
+          pinger.interval()
+          pinger.invoke()
+        }
+      }
+    })
+    this.on('removeListener', event => {
+      if(event === this.events.all && --this.allEventListenerCount === 0){
+        console.log('PINGERS OFF')
+        for(let pinger of Object.values(this.pingers)) pinger.cancel()
+      }
+    })
   }
 
   // Search Interfaces for that of our Access Point, so that it can be removed from SSIDs shown
@@ -31,12 +58,14 @@ export default class Wifi extends BetterEvents {
     knownSSIDs: Symbol('knownSSIDs')
   }
 
-  async _handleMonitor(args){
+  async statusPing(){
     const status = await this.status()
-    console.log(args, status.state, status.wpa_state)
-
-    if(args.startsWith('<3>CTRL-EVENT-CONNECTED')) setTimeout(async () => this.emit(this.events.status, await this.status()), connectStatusUpdateDelay)
     this.emit(this.events.status, status)
+  }
+
+  async scanPing(){
+    const scan = await this.SSIDscan()
+    this.emit(this.events.scan, scan)
   }
 
   async SSIDscan(){
@@ -44,7 +73,9 @@ export default class Wifi extends BetterEvents {
 
     const knownSSIDs = await this.wireless.listNetworks()
     const accessPointWifiAddress = await this.accessPointWifiAddress
-    const networksOnAir = await this.wireless.scan()
+    const networksOnAir = await this.wireless.scan().catch(() => null)
+
+    if(!networksOnAir) return this.scanCache.scan
 
     const groupedBySSID = networksOnAir.reduce((SSIDs, {ssid: SSID, address, ...other}) => ((address === accessPointWifiAddress) ? SSIDs : {
       ...SSIDs,
@@ -64,8 +95,6 @@ export default class Wifi extends BetterEvents {
       scan,
       staleAt: Date.now() + scanCacheTime
     }
-
-    this.emit(this.events.scan, scan)
 
     return scan
   }
@@ -92,11 +121,14 @@ export default class Wifi extends BetterEvents {
       signal
     }
 
+    if(final.ip_address && this.pingers.status.interval() === 500) this.pingers.status.interval(scanPingInterval)
+
     return final
   }
 
   async connect({SSID, password, id}={}){
     if(typeof id === 'number') {
+      this.pingers.status.interval(500)
       await this.wireless.enableNetwork(id)
       await this.wireless.selectNetwork(id)
       return await this.wireless.saveConfiguration()
@@ -106,6 +138,7 @@ export default class Wifi extends BetterEvents {
 
     if(!password) console.log('No Password Supplied for', SSID)
 
+    this.pingers.status.interval(500)
     return this.wireless.connect(SSID, password)
   }
 

@@ -1,4 +1,4 @@
-import EventEmitter from 'eventemitter3'
+import EventEmitter from 'events'
 
 export default class BetterEvents extends EventEmitter {
   events = {
@@ -6,6 +6,8 @@ export default class BetterEvents extends EventEmitter {
   }
 
   emit(eventName, ...args){
+    if(['newListener', 'removeListener'].includes(eventName)) return super.emit(eventName, ...args)
+
     super.emit(this.events.all, eventName, ...args)
     return super.emit(eventName, ...args)
   }
