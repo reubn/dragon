@@ -13,6 +13,7 @@ const mapDispatchToProps = dispatch => ({
 const mergeProps = (stateProps, {connectUnbound, requestPasswordUnbound}, {SSID, known, networks}) => {
   const secure = !!networks.find(({security}) => security !== 'open')
   const signal = Math.max(...networks.map(({signal}) => signal))
+  const flags = known ? known.flags : null
 
   // const connect = () => known ? connectUnbound({id: known.id}) :
 
@@ -26,6 +27,7 @@ const mergeProps = (stateProps, {connectUnbound, requestPasswordUnbound}, {SSID,
     SSID,
     secure,
     signal,
+    flags,
     connect
   }
 

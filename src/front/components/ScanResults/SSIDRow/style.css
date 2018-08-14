@@ -15,7 +15,14 @@
   height: var(--height);
 }
 .secure {
-  width: 1.5rem;
+  width: 1.3rem;
+  vertical-align: sub;
+  height: var(--height);
+  fill: var(--colours-white);
+  margin-right: 0.3rem;
+}
+.flags {
+  width: 1.2rem;
   vertical-align: sub;
   height: var(--height);
 }

@@ -1,0 +1,12 @@
+.disabled {
+  fill: var(--colours-orange);
+}
+.known {
+  fill: var(--colours-blue);
+}
+.unknown {
+  fill: transparent;
+}
+.tempDisabled {
+  fill: var(--colours-red);
+}

@@ -126,10 +126,10 @@ export default class Wifi extends BetterEvents {
     const list = await this.wireless.listNetworks()
     const networks = list.map(({ssid: SSID, flags, ...other}) => ({
       SSID,
-      /* flags: flags
+      flags: flags
         .split(']')
         .map(p => p.replace('[', ''))
-        .filter(a => a), */
+        .filter(a => a),
       ...other
     }))
 
